@@ -485,8 +485,8 @@ console.log(result);
               </div>
               <div className="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
               <p className="text-gray-700">
-                "Trip ke Bromo sangat berkesan! Guide-nya ramah dan profesional. 
-                Sunrise-nya luar biasa indah. Highly recommended!"
+                &quot;Trip ke Bromo sangat berkesan! Guide-nya ramah dan profesional. 
+                Sunrise-nya luar biasa indah. Highly recommended!&quot;
               </p>
             </div>
 
@@ -502,8 +502,8 @@ console.log(result);
               </div>
               <div className="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
               <p className="text-gray-700">
-                "Paket Bali-nya worth it banget! Hotel bagus, makanan enak, 
-                dan itinerary-nya pas. Pasti bakal booking lagi!"
+                &quot;Paket Bali-nya worth it banget! Hotel bagus, makanan enak, 
+                dan itinerary-nya pas. Pasti bakal booking lagi!&quot;
               </p>
             </div>
 
@@ -519,8 +519,8 @@ console.log(result);
               </div>
               <div className="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
               <p className="text-gray-700">
-                "Raja Ampat memang surga dunia! Terima kasih Jelajah Nusantara 
-                sudah mengatur semuanya dengan sempurna. Best experience ever!"
+                &quot;Raja Ampat memang surga dunia! Terima kasih Jelajah Nusantara 
+                sudah mengatur semuanya dengan sempurna. Best experience ever!&quot;
               </p>
             </div>
           </div>
