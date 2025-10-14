@@ -2,6 +2,1722 @@
 
 import { useState, useEffect } from 'react';
 
+type EasterEggKey = 'yangbisadiketik' | 'apadi' | 'yahsatupi';
+
+type EasterEggSourceFile = {
+  fileName: string;
+  code: string;
+};
+
+type EasterEggDetails = {
+  heading: string;
+  description: string;
+  files: EasterEggSourceFile[];
+};
+
+const yangbisadiketikSources: EasterEggSourceFile[] = [
+  {
+    fileName: 'kalkulator.md',
+    code: String.raw`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kalkulator</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f3f3f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .kalkulator {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      width: 210px;
+    }
+
+    input {
+      width: 100%;
+      height: 40px;
+      text-align: right;
+      font-size: 20px;
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+
+    .baris {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+
+    button {
+      width: 45px;
+      height: 45px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="kalkulator">
+    <input type="text" id="layar" readonly>
+
+    <div class="baris">
+      <button onclick="hapus()">C</button>
+      <button onclick="tambah('/')">÷</button>
+      <button onclick="tambah('*')">×</button>
+      <button onclick="tambah('-')">−</button>
+    </div>
+
+    <div class="baris">
+      <button onclick="tambah('7')">7</button>
+      <button onclick="tambah('8')">8</button>
+      <button onclick="tambah('9')">9</button>
+      <button onclick="tambah('+')">+</button>
+    </div>
+
+    <div class="baris">
+      <button onclick="tambah('4')">4</button>
+      <button onclick="tambah('5')">5</button>
+      <button onclick="tambah('6')">6</button>
+      <button onclick="hitung()">=</button>
+    </div>
+
+    <div class="baris">
+      <button onclick="tambah('1')">1</button>
+      <button onclick="tambah('2')">2</button>
+      <button onclick="tambah('3')">3</button>
+      <button onclick="tambah('0')">0</button>
+    </div>
+  </div>
+
+  <script>
+    let layar = document.getElementById("layar");
+
+    function tambah(isi) {
+      layar.value += isi;
+    }
+
+    function hapus() {
+      layar.value = "";
+    }
+
+    function hitung() {
+      try {
+        layar.value = eval(layar.value);
+      } catch {
+        layar.value = "Error";
+      }
+    }
+  </script>
+
+</body>
+</html>`
+  },
+  {
+    fileName: 'kalkuInput.md',
+    code: String.raw`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kalkulator Manual</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f3f3f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .kotak {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      width: 260px;
+    }
+
+    h3 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    input, select, button {
+      width: 100%;
+      height: 35px;
+      font-size: 16px;
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+
+    p {
+      font-size: 18px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="kotak">
+    <h3>Kalkulator Manual</h3>
+
+    <input id="angka1" type="number" placeholder="Angka pertama">
+    <select id="operator">
+      <option value="+">+</option>
+      <option value="-">−</option>
+      <option value="*">×</option>
+      <option value="/">÷</option>
+    </select>
+    <input id="angka2" type="number" placeholder="Angka kedua">
+
+    <button onclick="hitung()">Hitung</button>
+
+    <p id="hasil"></p>
+  </div>
+
+  <script>
+    function hitung() {
+      let a = parseFloat(document.getElementById("angka1").value);
+      let b = parseFloat(document.getElementById("angka2").value);
+      let op = document.getElementById("operator").value;
+      let hasil = 0;
+
+      if (isNaN(a) || isNaN(b)) {
+        document.getElementById("hasil").innerText = "Isi dulu kedua angka!";
+        return;
+      }
+
+      if (op === "+") hasil = a + b;
+      else if (op === "-") hasil = a - b;
+      else if (op === "*") hasil = a * b;
+      else if (op === "/") {
+        if (b === 0) {
+          document.getElementById("hasil").innerText = "Tidak bisa dibagi 0!";
+          return;
+        }
+        hasil = a / b;
+      }
+
+      document.getElementById("hasil").innerText = "Hasil: " + hasil;
+    }
+  </script>
+
+</body>
+</html>
+`
+  },
+  {
+    fileName: 'diskon.md',
+    code: String.raw`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kalkulator Diskon Validasi</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f3f3f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .kotak {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      width: 260px;
+    }
+
+    h3 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    input, button {
+      width: 100%;
+      height: 35px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      padding: 5px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    p {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="kotak">
+    <h3>Kalkulator Diskon</h3>
+
+    <input id="harga" type="number" placeholder="Harga asli">
+    <input id="diskon" type="number" placeholder="Diskon (%)">
+    <button onclick="hitungDiskon()">Hitung</button>
+    <p id="hasil"></p>
+  </div>
+
+  <script>
+    function hitungDiskon() {
+      let harga = parseFloat(document.getElementById("harga").value);
+      let diskon = parseFloat(document.getElementById("diskon").value);
+      let hasil = document.getElementById("hasil");
+
+      // validasi input kosong
+      if (isNaN(harga) || isNaN(diskon)) {
+        hasil.innerText = "Isi semua kolom terlebih dahulu!";
+        return;
+      }
+
+      // validasi harga > 0
+      if (harga <= 0) {
+        hasil.innerText = "Harga harus lebih dari 0!";
+        return;
+      }
+
+      // validasi diskon tidak boleh lebih dari 100
+      if (diskon < 0 || diskon > 100) {
+        hasil.innerText = "Diskon harus antara 0% sampai 100%!";
+        return;
+      }
+
+      // hitung potongan dan total
+      let potongan = (harga * diskon) / 100;
+      let total = harga - potongan;
+
+      hasil.innerText = 
+        "Harga setelah diskon: Rp " + total.toFixed(2);
+    }
+  </script>
+
+</body>
+</html>
+`
+  },
+  {
+    fileName: 'todo.md',
+    code: String.raw`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>To Do List Lengkap</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f3f3f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .kotak {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      width: 300px;
+    }
+
+    h3 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+      height: 35px;
+      padding: 5px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      height: 35px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #eee;
+      margin-bottom: 5px;
+      padding: 8px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    li.selesai {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    .hapus {
+      background: red;
+      color: white;
+      border: none;
+      padding: 3px 6px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .edit {
+      background: orange;
+      color: white;
+      border: none;
+      padding: 3px 6px;
+      border-radius: 4px;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+
+    .aksi {
+      display: flex;
+      gap: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="kotak">
+    <h3>To Do List</h3>
+    <input id="tugas" type="text" placeholder="Tulis tugas...">
+    <button onclick="tambahTugas()">Tambah</button>
+    <ul id="daftar"></ul>
+  </div>
+
+  <script>
+    function tambahTugas() {
+      let input = document.getElementById("tugas");
+      let teks = input.value.trim();
+      if (teks === "") return;
+
+      let li = document.createElement("li");
+      let span = document.createElement("span");
+      span.textContent = teks;
+
+      let editBtn = document.createElement("button");
+      editBtn.textContent = "Edit";
+      editBtn.className = "edit";
+      editBtn.onclick = function() {
+        let baru = prompt("Ubah tugas:", span.textContent);
+        if (baru !== null && baru.trim() !== "") {
+          span.textContent = baru;
+        }
+      };
+
+      let hapusBtn = document.createElement("button");
+      hapusBtn.textContent = "X";
+      hapusBtn.className = "hapus";
+      hapusBtn.onclick = function() {
+        li.remove();
+      };
+
+      span.onclick = function() {
+        li.classList.toggle("selesai");
+      };
+
+      let divAksi = document.createElement("div");
+      divAksi.className = "aksi";
+      divAksi.appendChild(editBtn);
+      divAksi.appendChild(hapusBtn);
+
+      li.appendChild(span);
+      li.appendChild(divAksi);
+      document.getElementById("daftar").appendChild(li);
+
+      input.value = "";
+    }
+  </script>
+
+</body>
+</html>`
+  },
+  {
+    fileName: 'todoLocal.md',
+    code: String.raw`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>To Do List dengan LocalStorage</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f3f3f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .kotak {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      width: 300px;
+    }
+
+    h3 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+      height: 35px;
+      padding: 5px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      height: 35px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #eee;
+      margin-bottom: 5px;
+      padding: 8px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    li.selesai {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    .hapus {
+      background: red;
+      color: white;
+      border: none;
+      padding: 3px 6px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .edit {
+      background: orange;
+      color: white;
+      border: none;
+      padding: 3px 6px;
+      border-radius: 4px;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+
+    .aksi {
+      display: flex;
+      gap: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="kotak">
+    <h3>To Do List</h3>
+    <input id="tugas" type="text" placeholder="Tulis tugas...">
+    <button onclick="tambahTugas()">Tambah</button>
+    <ul id="daftar"></ul>
+  </div>
+
+  <script>
+    let daftar = [];
+
+    window.onload = function() {
+      let data = localStorage.getItem("tugas");
+      if (data) {
+        daftar = JSON.parse(data);
+        render();
+      }
+    };
+
+    function simpan() {
+      localStorage.setItem("tugas", JSON.stringify(daftar));
+    }
+
+    function tambahTugas() {
+      let input = document.getElementById("tugas");
+      let teks = input.value.trim();
+      if (teks === "") return;
+
+      daftar.push({ teks: teks, selesai: false });
+      input.value = "";
+      simpan();
+      render();
+    }
+
+    function hapusTugas(index) {
+      daftar.splice(index, 1);
+      simpan();
+      render();
+    }
+
+    function editTugas(index) {
+      let baru = prompt("Ubah tugas:", daftar[index].teks);
+      if (baru !== null && baru.trim() !== "") {
+        daftar[index].teks = baru.trim();
+        simpan();
+        render();
+      }
+    }
+
+    function toggleSelesai(index) {
+      daftar[index].selesai = !daftar[index].selesai;
+      simpan();
+      render();
+    }
+
+    function render() {
+      let list = document.getElementById("daftar");
+      list.innerHTML = "";
+      daftar.forEach((item, i) => {
+        let li = document.createElement("li");
+        if (item.selesai) li.classList.add("selesai");
+
+        let span = document.createElement("span");
+        span.textContent = item.teks;
+        span.onclick = () => toggleSelesai(i);
+
+        let editBtn = document.createElement("button");
+        editBtn.textContent = "Edit";
+        editBtn.className = "edit";
+        editBtn.onclick = () => editTugas(i);
+
+        let hapusBtn = document.createElement("button");
+        hapusBtn.textContent = "X";
+        hapusBtn.className = "hapus";
+        hapusBtn.onclick = () => hapusTugas(i);
+
+        let divAksi = document.createElement("div");
+        divAksi.className = "aksi";
+        divAksi.appendChild(editBtn);
+        divAksi.appendChild(hapusBtn);
+
+        li.appendChild(span);
+        li.appendChild(divAksi);
+        list.appendChild(li);
+      });
+    }
+  </script>
+
+</body>
+</html>`
+  }
+];
+const apadiSources: EasterEggSourceFile[] = [
+  {
+    fileName: 'kalkulator.md',
+    code: String.raw`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Sederhana</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1e1f29, #2d2f3a);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .calculator {
+      background: #2c2f3f;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      width: 320px;
+    }
+
+    .display {
+      background: #1c1d26;
+      color: #00ff99;
+      font-size: 2rem;
+      text-align: right;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      word-wrap: break-word;
+      min-height: 60px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      background: #3a3d4f;
+      border: none;
+      color: white;
+      font-size: 1.4rem;
+      padding: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #50536a;
+    }
+
+    .operator {
+      background: #ff9500;
+    }
+
+    .operator:hover {
+      background: #ffad33;
+    }
+
+    .equal {
+      background: #00b894;
+      grid-column: span 2;
+    }
+
+    .equal:hover {
+      background: #00d3aa;
+    }
+
+    .clear {
+      background: #d63031;
+    }
+
+    .clear:hover {
+      background: #ff4d4d;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button class="clear" onclick="clearDisplay()">C</button>
+      <button onclick="deleteLast()">⌫</button>
+      <button onclick="append('%')">%</button>
+      <button class="operator" onclick="append('/')">÷</button>
+
+      <button onclick="append('7')">7</button>
+      <button onclick="append('8')">8</button>
+      <button onclick="append('9')">9</button>
+      <button class="operator" onclick="append('*')">×</button>
+
+      <button onclick="append('4')">4</button>
+      <button onclick="append('5')">5</button>
+      <button onclick="append('6')">6</button>
+      <button class="operator" onclick="append('-')">−</button>
+
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button class="operator" onclick="append('+')">+</button>
+
+      <button onclick="append('0')">0</button>
+      <button onclick="append('.')">.</button>
+      <button class="equal" onclick="calculate()">=</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+
+    function append(value) {
+      if (display.innerText === "0") display.innerText = "";
+      display.innerText += value;
+    }
+
+    function clearDisplay() {
+      display.innerText = "0";
+    }
+
+    function deleteLast() {
+      if (display.innerText.length > 1) {
+        display.innerText = display.innerText.slice(0, -1);
+      } else {
+        display.innerText = "0";
+      }
+    }
+
+    function calculate() {
+      try {
+        let result = eval(display.innerText.replace('÷', '/').replace('×', '*'));
+        display.innerText = result;
+      } catch {
+        display.innerText = "Error";
+      }
+    }
+  </script>
+
+</body>
+</html>
+`
+  },
+  {
+    fileName: 'diskon.md',
+    code: String.raw`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Diskon</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1e1f29, #2d2f3a);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .card {
+      background: #2c2f3f;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      width: 320px;
+      margin: 20px auto;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      font-size: 0.95rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      background: #1c1d26;
+      color: #00ff99;
+    }
+
+    button {
+      width: 100%;
+      background: #00b894;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      padding: 12px;
+      border-radius: 10px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #00d3aa;
+    }
+
+    .hasil {
+      background: #1c1d26;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: left;
+    }
+
+    .hasil p {
+      margin: 5px 0;
+      font-size: 1rem;
+    }
+
+    span {
+      color: #00ff99;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>💸 Kalkulator Diskon</h1>
+    <div class="card">
+      <label for="harga">Harga Barang (Rp)</label>
+      <input type="number" id="harga">
+
+      <label for="diskon">Diskon (%)</label>
+      <input type="number" id="diskon">
+
+      <button onclick="hitungDiskon()">Hitung</button>
+
+      <div class="hasil" id="hasil">
+        <p>Harga Setelah Diskon: <span id="hargaSetelah">Rp 0</span></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function hitungDiskon() {
+      const harga = parseFloat(document.getElementById("harga").value);
+      const diskon = parseFloat(document.getElementById("diskon").value);
+
+      if (isNaN(harga) || isNaN(diskon)) {
+        alert("Harap isi semua kolom dengan angka yang valid!");
+        return;
+      }
+
+      const hargaSetelah = harga - (harga * diskon / 100);
+
+      document.getElementById("hargaSetelah").textContent =
+        "Rp " + hargaSetelah.toLocaleString("id-ID");
+    }
+  </script>
+
+</body>
+</html>
+
+`
+  },
+  {
+    fileName: 'TodoList.md',
+    code: String.raw`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List dengan Edit</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1e1f29, #2d2f3a);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .todo-container {
+      background: #2c2f3f;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      width: 380px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      color: #00ff99;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      background: #1c1d26;
+      color: #808080;
+    }
+
+    button {
+      background: #00b894;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #00d3aa;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      background: #1c1d26;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.2s;
+    }
+
+    li.done {
+      text-decoration: line-through;
+      color: #777;
+    }
+
+    .task-text {
+      flex: 1;
+      cursor: pointer;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 6px;
+    }
+
+    .edit-btn, .delete-btn, .save-btn {
+      border: none;
+      border-radius: 5px;
+      padding: 5px 8px;
+      cursor: pointer;
+      transition: 0.2s;
+      color: white;
+    }
+
+    .edit-btn { background: #ff9500; }
+    .edit-btn:hover { background: #ffad33; }
+
+    .delete-btn { background: #d63031; }
+    .delete-btn:hover { background: #ff4d4d; }
+
+    .save-btn { background: #00b894; }
+    .save-btn:hover { background: #00d3aa; }
+
+    .edit-input {
+      width: 100%;
+      padding: 5px;
+      border: none;
+      border-radius: 5px;
+      background: #2c2f3f;
+      color: #3c3c3c;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="todo-container">
+    <h1> To Do List</h1>
+
+    <div class="input-area">
+      <input type="text" id="taskInput" placeholder="Tambahkan tugas...">
+      <button onclick="addTask()">Tambah</button>
+    </div>
+
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    const taskInput = document.getElementById("taskInput");
+    const taskList = document.getElementById("taskList");
+
+    function addTask() {
+      const text = taskInput.value.trim();
+      if (text === "") {
+        alert("Masukkan tugas terlebih dahulu!");
+        return;
+      }
+
+      const li = document.createElement("li");
+
+      const span = document.createElement("span");
+      span.textContent = text;
+      span.classList.add("task-text");
+      span.addEventListener("click", () => {
+        li.classList.toggle("done");
+      });
+
+      const actionDiv = document.createElement("div");
+      actionDiv.classList.add("action-buttons");
+
+      const editBtn = document.createElement("button");
+      editBtn.textContent = "Edit";
+      editBtn.classList.add("edit-btn");
+      editBtn.addEventListener("click", () => editTask(li, span, editBtn));
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Hapus";
+      deleteBtn.classList.add("delete-btn");
+      deleteBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        li.remove();
+      });
+
+      actionDiv.appendChild(editBtn);
+      actionDiv.appendChild(deleteBtn);
+
+      li.appendChild(span);
+      li.appendChild(actionDiv);
+      taskList.appendChild(li);
+
+      taskInput.value = "";
+    }
+
+    function editTask(li, span, editBtn) {
+      const currentText = span.textContent;
+      const inputEdit = document.createElement("input");
+      inputEdit.value = currentText;
+      inputEdit.classList.add("edit-input");
+
+      li.replaceChild(inputEdit, span);
+      editBtn.textContent = "Simpan";
+      editBtn.classList.remove("edit-btn");
+      editBtn.classList.add("save-btn");
+
+      editBtn.onclick = () => {
+        const newText = inputEdit.value.trim();
+        if (newText === "") {
+          alert("Teks tidak boleh kosong!");
+          return;
+        }
+        span.textContent = newText;
+        li.replaceChild(span, inputEdit);
+        editBtn.textContent = "Edit";
+        editBtn.classList.remove("save-btn");
+        editBtn.classList.add("edit-btn");
+        editBtn.onclick = () => editTask(li, span, editBtn);
+      };
+    }
+
+    taskInput.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") addTask();
+    });
+  </script>
+
+</body>
+</html>
+
+
+`
+  },
+  
+];
+const yahsatupiSources: EasterEggSourceFile[] = [
+  {
+    fileName: 'kalkulator.md',
+    code: String.raw`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Sederhana</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1e1f29, #2d2f3a);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .calculator {
+      background: #2c2f3f;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      width: 320px;
+    }
+
+    .display {
+      background: #1c1d26;
+      color: #00ff99;
+      font-size: 2rem;
+      text-align: right;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      word-wrap: break-word;
+      min-height: 60px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      background: #3a3d4f;
+      border: none;
+      color: white;
+      font-size: 1.4rem;
+      padding: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #50536a;
+    }
+
+    .operator {
+      background: #ff9500;
+    }
+
+    .operator:hover {
+      background: #ffad33;
+    }
+
+    .equal {
+      background: #00b894;
+      grid-column: span 2;
+    }
+
+    .equal:hover {
+      background: #00d3aa;
+    }
+
+    .clear {
+      background: #d63031;
+    }
+
+    .clear:hover {
+      background: #ff4d4d;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button class="clear" onclick="clearDisplay()">C</button>
+      <button onclick="deleteLast()">⌫</button>
+      <button onclick="append('%')">%</button>
+      <button class="operator" onclick="append('/')">÷</button>
+
+      <button onclick="append('7')">7</button>
+      <button onclick="append('8')">8</button>
+      <button onclick="append('9')">9</button>
+      <button class="operator" onclick="append('*')">×</button>
+
+      <button onclick="append('4')">4</button>
+      <button onclick="append('5')">5</button>
+      <button onclick="append('6')">6</button>
+      <button class="operator" onclick="append('-')">−</button>
+
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button class="operator" onclick="append('+')">+</button>
+
+      <button onclick="append('0')">0</button>
+      <button onclick="append('.')">.</button>
+      <button class="equal" onclick="calculate()">=</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+
+    function append(value) {
+      if (display.innerText === "0") display.innerText = "";
+      display.innerText += value;
+    }
+
+    function clearDisplay() {
+      display.innerText = "0";
+    }
+
+    function deleteLast() {
+      if (display.innerText.length > 1) {
+        display.innerText = display.innerText.slice(0, -1);
+      } else {
+        display.innerText = "0";
+      }
+    }
+
+    function calculate() {
+      try {
+        let result = eval(display.innerText.replace('÷', '/').replace('×', '*'));
+        display.innerText = result;
+      } catch {
+        display.innerText = "Error";
+      }
+    }
+  </script>
+
+</body>
+</html>
+`
+  },
+  {
+    fileName: 'diskon.md',
+    code: String.raw`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Diskon</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1e1f29, #2d2f3a);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .card {
+      background: #2c2f3f;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      width: 320px;
+      margin: 20px auto;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      font-size: 0.95rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      background: #1c1d26;
+      color: #00ff99;
+    }
+
+    button {
+      width: 100%;
+      background: #00b894;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      padding: 12px;
+      border-radius: 10px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #00d3aa;
+    }
+
+    .hasil {
+      background: #1c1d26;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: left;
+    }
+
+    .hasil p {
+      margin: 5px 0;
+      font-size: 1rem;
+    }
+
+    span {
+      color: #00ff99;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>💸 Kalkulator Diskon</h1>
+    <div class="card">
+      <label for="harga">Harga Barang (Rp)</label>
+      <input type="number" id="harga">
+
+      <label for="diskon">Diskon (%)</label>
+      <input type="number" id="diskon">
+
+      <button onclick="hitungDiskon()">Hitung</button>
+
+      <div class="hasil" id="hasil">
+        <p>Harga Setelah Diskon: <span id="hargaSetelah">Rp 0</span></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function hitungDiskon() {
+      const harga = parseFloat(document.getElementById("harga").value);
+      const diskon = parseFloat(document.getElementById("diskon").value);
+
+      if (isNaN(harga) || isNaN(diskon)) {
+        alert("Harap isi semua kolom dengan angka yang valid!");
+        return;
+      }
+
+      const hargaSetelah = harga - (harga * diskon / 100);
+
+      document.getElementById("hargaSetelah").textContent =
+        "Rp " + hargaSetelah.toLocaleString("id-ID");
+    }
+  </script>
+
+</body>
+</html>
+
+`
+  },
+  {
+    fileName: 'TodoList.md',
+    code: String.raw`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List dengan Edit</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1e1f29, #2d2f3a);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .todo-container {
+      background: #2c2f3f;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      width: 380px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      color: #00ff99;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      background: #1c1d26;
+      color: #808080;
+    }
+
+    button {
+      background: #00b894;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #00d3aa;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      background: #1c1d26;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.2s;
+    }
+
+    li.done {
+      text-decoration: line-through;
+      color: #777;
+    }
+
+    .task-text {
+      flex: 1;
+      cursor: pointer;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 6px;
+    }
+
+    .edit-btn, .delete-btn, .save-btn {
+      border: none;
+      border-radius: 5px;
+      padding: 5px 8px;
+      cursor: pointer;
+      transition: 0.2s;
+      color: white;
+    }
+
+    .edit-btn { background: #ff9500; }
+    .edit-btn:hover { background: #ffad33; }
+
+    .delete-btn { background: #d63031; }
+    .delete-btn:hover { background: #ff4d4d; }
+
+    .save-btn { background: #00b894; }
+    .save-btn:hover { background: #00d3aa; }
+
+    .edit-input {
+      width: 100%;
+      padding: 5px;
+      border: none;
+      border-radius: 5px;
+      background: #2c2f3f;
+      color: #3c3c3c;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="todo-container">
+    <h1> To Do List</h1>
+
+    <div class="input-area">
+      <input type="text" id="taskInput" placeholder="Tambahkan tugas...">
+      <button onclick="addTask()">Tambah</button>
+    </div>
+
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    const taskInput = document.getElementById("taskInput");
+    const taskList = document.getElementById("taskList");
+
+    function addTask() {
+      const text = taskInput.value.trim();
+      if (text === "") {
+        alert("Masukkan tugas terlebih dahulu!");
+        return;
+      }
+
+      const li = document.createElement("li");
+
+      const span = document.createElement("span");
+      span.textContent = text;
+      span.classList.add("task-text");
+      span.addEventListener("click", () => {
+        li.classList.toggle("done");
+      });
+
+      const actionDiv = document.createElement("div");
+      actionDiv.classList.add("action-buttons");
+
+      const editBtn = document.createElement("button");
+      editBtn.textContent = "Edit";
+      editBtn.classList.add("edit-btn");
+      editBtn.addEventListener("click", () => editTask(li, span, editBtn));
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Hapus";
+      deleteBtn.classList.add("delete-btn");
+      deleteBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        li.remove();
+      });
+
+      actionDiv.appendChild(editBtn);
+      actionDiv.appendChild(deleteBtn);
+
+      li.appendChild(span);
+      li.appendChild(actionDiv);
+      taskList.appendChild(li);
+
+      taskInput.value = "";
+    }
+
+    function editTask(li, span, editBtn) {
+      const currentText = span.textContent;
+      const inputEdit = document.createElement("input");
+      inputEdit.value = currentText;
+      inputEdit.classList.add("edit-input");
+
+      li.replaceChild(inputEdit, span);
+      editBtn.textContent = "Simpan";
+      editBtn.classList.remove("edit-btn");
+      editBtn.classList.add("save-btn");
+
+      editBtn.onclick = () => {
+        const newText = inputEdit.value.trim();
+        if (newText === "") {
+          alert("Teks tidak boleh kosong!");
+          return;
+        }
+        span.textContent = newText;
+        li.replaceChild(span, inputEdit);
+        editBtn.textContent = "Edit";
+        editBtn.classList.remove("save-btn");
+        editBtn.classList.add("edit-btn");
+        editBtn.onclick = () => editTask(li, span, editBtn);
+      };
+    }
+
+    taskInput.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") addTask();
+    });
+  </script>
+
+</body>
+</html>
+
+
+`
+  },
+  
+];
+
+const easterEggSourceMap: Record<EasterEggKey, EasterEggDetails> = {
+  yangbisadiketik: {
+    heading: '🔓 SECRET SOURCE CODE UNLOCKED! 🔓',
+    description: '⚠️ Rahasia: Kode ini adalah kumpulan source code rahasia versi HTML & JS untuk kalkulator, kalkulator diskon, dan to-do list. Simpan baik-baik ya! 🗺️✨',
+    files: yangbisadiketikSources,
+  },
+  apadi: {
+    heading: '🧩 Easter Egg "apadi"',
+    description: 'Source code untuk easter egg ini belum tersedia. Nantikan update berikutnya! 🚧',
+    files: apadiSources,
+  },
+  yahsatupi: {
+    heading: '🧩 Easter Egg "yahsatupi"',
+    description: 'Source code rahasia akan segera hadir di update berikutnya! ✨',
+    files: yahsatupiSources,
+  },
+};
+
+const isEasterEggInput = (value: string): value is EasterEggKey =>
+  value === 'yangbisadiketik' || value === 'apadi' || value === 'yahsatupi';
+
 export default function Home() {
   const [destination, setDestination] = useState('');
   const [email, setEmail] = useState('');
@@ -9,30 +1725,26 @@ export default function Home() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   
   // Easter Egg State - Source Code Rahasia
-  const [showSourceCode, setShowSourceCode] = useState(false);
+  const [activeEasterEgg, setActiveEasterEgg] = useState<EasterEggKey | null>(null);
 
   // Check for Easter Egg
   useEffect(() => {
-    const checkEasterEgg = () => {
-      const input = destination.toLowerCase().trim();
-      
-      // Easter Egg: "yangbisadiketik" → Show Secret Source Code
-      if (input === 'yangbisadiketik') {
-        setShowSourceCode(true);
-      } else if (showSourceCode && input !== 'yangbisadiketik') {
-        // Hide source code when user types something else
-        setShowSourceCode(false);
+    const input = destination.toLowerCase().trim();
+
+    if (isEasterEggInput(input)) {
+      if (activeEasterEgg !== input) {
+        setActiveEasterEgg(input);
       }
-    };
-    
-    checkEasterEgg();
-  }, [destination, showSourceCode]);
+    } else if (activeEasterEgg !== null) {
+      setActiveEasterEgg(null);
+    }
+  }, [destination, activeEasterEgg]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const input = destination.toLowerCase().trim();
     
-    if (input === 'yangbisadiketik') {
+    if (isEasterEggInput(input)) {
       // Easter egg sudah ditrigger, jangan alert
       return;
     }
@@ -46,95 +1758,7 @@ export default function Home() {
     setTimeout(() => setIsSubmitted(false), 3000);
   };
 
-  // Secret Source Code - Algoritma Rahasia
-  const secretSourceCode = `// 🔐 ALGORITMA RAHASIA PENCARI DESTINASI TERSEMBUNYI
-// Created by: Jelajah Nusantara Secret Team
-// Version: 1.0.0 - CLASSIFIED
 
-class DestinationFinder {
-  constructor() {
-    this.hiddenPlaces = [
-      { name: "Pulau Komodo", coordinates: [-8.5833, 119.4500] },
-      { name: "Danau Toba", coordinates: [2.6845, 98.8756] },
-      { name: "Bunaken", coordinates: [1.6167, 124.7667] },
-      { name: "Wakatobi", coordinates: [-5.4833, 123.7500] },
-      { name: "Derawan", coordinates: [2.2833, 118.2333] }
-    ];
-    this.secretKey = "GACOR_NUSANTARA_2024";
-  }
-
-  // Fungsi untuk decode koordinat rahasia
-  decodeSecret(encrypted) {
-    return encrypted.split('').reverse().join('');
-  }
-
-  // Algoritma pencarian destinasi tersembunyi
-  findHiddenDestination(userInput) {
-    const hash = this.generateHash(userInput);
-    const index = hash % this.hiddenPlaces.length;
-    return this.hiddenPlaces[index];
-  }
-
-  // Generate hash dari input user
-  generateHash(str) {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      const char = str.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
-      hash = hash & hash; // Convert to 32bit integer
-    }
-    return Math.abs(hash);
-  }
-
-  // Validasi akses ke destinasi rahasia
-  validateAccess(password) {
-    return password === this.secretKey;
-  }
-
-  // Main function - Temukan destinasi impianmu!
-  discover(userQuery, password) {
-    if (!this.validateAccess(password)) {
-      return { error: "Access Denied! 🔒" };
-    }
-
-    const destination = this.findHiddenDestination(userQuery);
-    return {
-      success: true,
-      destination: destination.name,
-      coordinates: destination.coordinates,
-      message: "Destinasi rahasia ditemukan! 🗺️✨",
-      secretCode: this.decodeSecret("4202_ARATNASUN_ROCAG")
-    };
-  }
-}
-
-// Usage Example:
-const finder = new DestinationFinder();
-const result = finder.discover("petualangan", "GACOR_NUSANTARA_2024");
-console.log(result);
-
-// Output: 
-// {
-//   success: true,
-//   destination: "Wakatobi",
-//   coordinates: [-5.4833, 123.7500],
-//   message: "Destinasi rahasia ditemukan! 🗺️✨",
-//   secretCode: "GACOR_NUSANTARA_2024"
-// }
-
-/* 
- * 🎯 CATATAN RAHASIA:
- * Kode ini menggunakan algoritma hash khusus untuk
- * menemukan destinasi tersembunyi di Indonesia.
- * Setiap input akan menghasilkan destinasi unik!
- * 
- * Try it yourself:
- * - Input: "petualangan" → Wakatobi
- * - Input: "liburan" → Bunaken  
- * - Input: "wisata" → Derawan
- * 
- * Happy exploring! 🏝️
- */`;
 
   return (
     <div className="min-h-screen transition-all duration-500 bg-gradient-to-b from-sky-400 to-blue-600">
@@ -191,39 +1815,55 @@ console.log(result);
             </button>
           </form>
           
-          {/* Easter Egg - Secret Source Code */}
-          {showSourceCode && (
+          {/* Easter Egg - Source Code Collection */}
+          {activeEasterEgg && (
             <div className="mt-6 animate-fade-in">
               <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg p-4 mb-4">
                 <p className="text-white font-bold text-center text-lg">
-                  🔓 SECRET SOURCE CODE UNLOCKED! 🔓
+                  {easterEggSourceMap[activeEasterEgg].heading}
                 </p>
               </div>
-              
-              <div className="bg-gray-900 rounded-lg p-6 shadow-2xl border-2 border-green-500 max-h-96 overflow-y-auto">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-green-400 font-mono text-sm">💻 secret-code.js</span>
-                  <button 
-                    onClick={() => {
-                      navigator.clipboard.writeText(secretSourceCode);
-                      alert('Source code copied to clipboard! 📋');
-                    }}
-                    className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-xs font-semibold transition"
-                  >
-                    Copy Code
-                  </button>
+
+              {easterEggSourceMap[activeEasterEgg].files.length > 0 ? (
+                <div className="space-y-4">
+                  {easterEggSourceMap[activeEasterEgg].files.map(({ fileName, code }) => (
+                    <div
+                      key={fileName}
+                      className="bg-gray-900 rounded-lg p-6 shadow-2xl border-2 border-green-500 max-h-96 overflow-y-auto"
+                    >
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-green-400 font-mono text-sm">� {fileName}</span>
+                        <button
+                          onClick={() => {
+                            navigator.clipboard.writeText(code);
+                            alert(`Source code dari ${fileName} telah disalin! 📋`);
+                          }}
+                          className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-xs font-semibold transition"
+                        >
+                          Copy Code
+                        </button>
+                      </div>
+                      <pre className="text-green-400 font-mono text-xs leading-relaxed overflow-x-auto">
+                        <code>{code}</code>
+                      </pre>
+                    </div>
+                  ))}
                 </div>
-                <pre className="text-green-400 font-mono text-xs leading-relaxed overflow-x-auto">
-                  <code>{secretSourceCode}</code>
-                </pre>
-              </div>
-              
-              <div className="mt-4 bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
-                <p className="text-yellow-800 text-sm">
-                  <strong>⚠️ Rahasia:</strong> Kode ini adalah algoritma rahasia untuk menemukan destinasi tersembunyi di Indonesia! 
-                  Gunakan dengan bijak! 🗺️✨
-                </p>
-              </div>
+              ) : (
+                <div className="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+                  <p className="text-yellow-800 text-sm">
+                    {easterEggSourceMap[activeEasterEgg].description}
+                  </p>
+                </div>
+              )}
+
+              {easterEggSourceMap[activeEasterEgg].files.length > 0 && (
+                <div className="mt-4 bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+                  <p className="text-yellow-800 text-sm">
+                    {easterEggSourceMap[activeEasterEgg].description}
+                  </p>
+                </div>
+              )}
             </div>
           )}
         </div>
