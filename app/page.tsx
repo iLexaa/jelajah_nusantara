@@ -1818,21 +1818,21 @@ export default function Home() {
 
 
   return (
-    <div className="min-h-screen transition-all duration-500 bg-gradient-to-b from-sky-400 to-blue-600">
+    <div className="min-h-screen transition-all duration-500 bg-gradient-to-b from-black-400 to-gray-600">
       {/* Header */}
-      <header className="bg-white/95 backdrop-blur-sm shadow-md sticky top-0 z-50">
+      <header className="bg-black/95 backdrop-blur-sm shadow-md sticky top-0 z-50">
         <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <span className="text-3xl">🏝️</span>
-            <span className="text-2xl font-bold text-blue-600">Jelajah Nusantara</span>
+            <span className="text-3xl"></span>
+            <span className="text-2xl font-bold text-gray-600">Jelajah Nusantara</span>
           </div>
           <div className="hidden md:flex gap-8 text-gray-700 font-medium">
-            <a href="#destinations" className="hover:text-blue-600 transition">Destinasi</a>
-            <a href="#packages" className="hover:text-blue-600 transition">Paket Tour</a>
-            <a href="#testimonials" className="hover:text-blue-600 transition">Testimoni</a>
-            <a href="#contact" className="hover:text-blue-600 transition">Kontak</a>
+            <a href="#destinations" className="hover:text-gray-600 transition">Destinasi</a>
+            <a href="#packages" className="hover:text-gray-600 transition">Paket Tour</a>
+            <a href="#testimonials" className="hover:text-gray-600 transition">Testimoni</a>
+            <a href="#contact" className="hover:text-gray-600 transition">Kontak</a>
           </div>
-          <button className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition font-semibold">
+          <button className="bg-black-600 text-black px-6 py-2 rounded-full hover:bg-gray-700 transition font-semibold">
             Login
           </button>
         </nav>
@@ -1840,18 +1840,18 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-20 text-center">
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg">
+        <h1 className="text-5xl text-black md:text-7xl font-bold text-gray mb-6 drop-shadow-lg">
           Jelajahi Keindahan
           <br />
-          <span className="text-yellow-300">Indonesia</span>
+          <span className="text-black">Indonesia</span>
         </h1>
-        <p className="text-xl md:text-2xl text-white/95 mb-12 max-w-3xl mx-auto">
+        <p className="text-xl md:text-2xl text-black/95 mb-12 max-w-3xl mx-auto">
           Temukan destinasi impian Anda! Dari pantai eksotis hingga gunung menawan, 
           kami siap mengantarkan petualangan tak terlupakan.
         </p>
 
         {/* Search Box */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-4xl mx-auto mb-12 relative">
+        <div className="bg-black rounded-2xl shadow-2xl p-8 max-w-4xl mx-auto mb-12 relative">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">
             🔍 Cari Destinasi Impian Anda
           </h2>
@@ -1861,12 +1861,12 @@ export default function Home() {
               placeholder="Mau kemana? (contoh: Bali, Raja Ampat, Bromo...)"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
-              className="flex-1 px-6 py-4 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none text-gray-800 text-lg"
+              className="flex-1 px-6 py-4 rounded-lg border-2 border-black-300 focus:border-black-500 focus:outline-none text-gray-800 text-lg"
               required
             />
             <button
               type="submit"
-              className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold py-4 px-8 rounded-lg hover:from-blue-700 hover:to-cyan-600 transition transform hover:scale-105 whitespace-nowrap"
+              className="bg-gradient-to-r from-black-600 to-gray-500 text-black font-bold py-4 px-8 rounded-lg hover:from-black-700 hover:to-gray-600 transition transform hover:scale-105 whitespace-nowrap"
             >
               Cari Sekarang 🚀
             </button>
@@ -1875,8 +1875,8 @@ export default function Home() {
           {/* Easter Egg - Source Code Collection */}
           {activeEasterEgg && (
             <div className="mt-6 animate-fade-in">
-              <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg p-4 mb-4">
-                <p className="text-white font-bold text-center text-lg">
+              <div className="bg-gradient-to-r from-black-600 to-gray-600 rounded-lg p-4 mb-4">
+                <p className="text-gray font-bold text-center text-lg">
                   {easterEggSourceMap[activeEasterEgg].heading}
                 </p>
               </div>
@@ -1886,21 +1886,21 @@ export default function Home() {
                   {easterEggSourceMap[activeEasterEgg].files.map(({ fileName, code }) => (
                     <div
                       key={fileName}
-                      className="bg-gray-900 rounded-lg p-6 shadow-2xl border-2 border-green-500 max-h-96 overflow-y-auto"
+                      className="bg-gray-900 rounded-lg p-6 shadow-2xl border-2 border-gray-500 max-h-96 overflow-y-auto"
                     >
                       <div className="flex items-center justify-between mb-4">
-                        <span className="text-green-400 font-mono text-sm">� {fileName}</span>
+                        <span className="text-gray-400 font-mono text-sm">� {fileName}</span>
                         <button
                           onClick={() => {
                             navigator.clipboard.writeText(code);
                             alert(`Source code dari ${fileName} telah disalin! 📋`);
                           }}
-                          className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-xs font-semibold transition"
+                          className="bg-gray-600 hover:bg-gray-700 text-black px-3 py-1 rounded text-xs font-semibold transition"
                         >
                           Copy Code
                         </button>
                       </div>
-                      <pre className="text-green-400 font-mono text-xs leading-relaxed overflow-x-auto">
+                      <pre className="text-amber-700 font-mono text-xs leading-relaxed overflow-x-auto">
                         <code>{code}</code>
                       </pre>
                     </div>
