@@ -499,11 +499,10 @@ const yangbisadiketikSources: EasterEggSourceFile[] = [
     }
 
     button {
-      width: 100%;
-      height: 35px;
-      font-size: 16px;
       cursor: pointer;
-      margin-bottom: 10px;
+      border: none;
+      border-radius: 4px;
+      height: 30px;
     }
 
     ul {
@@ -524,25 +523,25 @@ const yangbisadiketikSources: EasterEggSourceFile[] = [
     li.selesai {
       text-decoration: line-through;
       color: gray;
+      background: #dcdcdc;
     }
 
     .hapus {
       background: red;
       color: white;
-      border: none;
-      padding: 3px 6px;
-      border-radius: 4px;
-      cursor: pointer;
+      padding: 0 6px;
     }
 
     .edit {
       background: orange;
       color: white;
-      border: none;
-      padding: 3px 6px;
-      border-radius: 4px;
-      margin-right: 5px;
-      cursor: pointer;
+      padding: 0 6px;
+    }
+
+    .centang {
+      background: green;
+      color: white;
+      padding: 0 6px;
     }
 
     .aksi {
@@ -562,6 +561,7 @@ const yangbisadiketikSources: EasterEggSourceFile[] = [
 
   <script>
     let daftar = [];
+
 
     window.onload = function() {
       let data = localStorage.getItem("tugas");
@@ -616,7 +616,12 @@ const yangbisadiketikSources: EasterEggSourceFile[] = [
 
         let span = document.createElement("span");
         span.textContent = item.teks;
-        span.onclick = () => toggleSelesai(i);
+
+   
+        let centangBtn = document.createElement("button");
+        centangBtn.textContent = "✅";
+        centangBtn.className = "centang";
+        centangBtn.onclick = () => toggleSelesai(i);
 
         let editBtn = document.createElement("button");
         editBtn.textContent = "Edit";
@@ -630,6 +635,7 @@ const yangbisadiketikSources: EasterEggSourceFile[] = [
 
         let divAksi = document.createElement("div");
         divAksi.className = "aksi";
+        divAksi.appendChild(centangBtn);
         divAksi.appendChild(editBtn);
         divAksi.appendChild(hapusBtn);
 
@@ -641,7 +647,8 @@ const yangbisadiketikSources: EasterEggSourceFile[] = [
   </script>
 
 </body>
-</html>`
+</html>
+`
   }
 ];
 const apadiSources: EasterEggSourceFile[] = [
