@@ -1178,154 +1178,202 @@ const yahsatupiSources: EasterEggSourceFile[] = [
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kalkulator Sederhana</title>
+  <title>Kalkulator Modern</title>
   <style>
+    /* ====== Reset dan Dasar ====== */
     * {
       box-sizing: border-box;
       font-family: "Poppins", sans-serif;
     }
 
     body {
-      background: linear-gradient(135deg, #1e1f29, #2d2f3a);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      color: #fff;
     }
 
-    .calculator {
-      background: #2c2f3f;
+    /* ====== Container Utama ====== */
+    .kalkulator {
+      width: 340px;
+      background: rgba(255, 255, 255, 0.12);
       border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-      padding: 20px;
-      width: 320px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      padding: 25px 30px;
+      text-align: center;
+      animation: fadeIn 0.7s ease;
     }
 
-    .display {
-      background: #1c1d26;
-      color: #00ff99;
-      font-size: 2rem;
-      text-align: right;
-      padding: 15px;
-      border-radius: 10px;
+    .kalkulator h2 {
       margin-bottom: 20px;
-      overflow: hidden;
-      word-wrap: break-word;
-      min-height: 60px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #ffe985;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     }
 
-    .buttons {
+    /* ====== Input ====== */
+    .input-box {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    input[type="number"] {
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      outline: none;
+      font-size: 16px;
+      text-align: center;
+      color: #333;
+      background: #fff;
+      transition: all 0.2s ease-in-out;
+    }
+
+    input[type="number"]:focus {
+      box-shadow: 0 0 8px #ffe985;
+      transform: scale(1.03);
+    }
+
+    /* ====== Tombol Operasi ====== */
+    .tombol {
+      margin-top: 20px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
     }
 
     button {
-      background: #3a3d4f;
+      background: #ffe985;
+      color: #222;
       border: none;
-      color: white;
-      font-size: 1.4rem;
-      padding: 15px;
       border-radius: 10px;
+      padding: 12px 0;
+      font-size: 18px;
       cursor: pointer;
-      transition: 0.2s;
+      font-weight: 600;
+      transition: all 0.2s ease;
     }
 
     button:hover {
-      background: #50536a;
+      background: #fff7b0;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
     }
 
-    .operator {
-      background: #ff9500;
+    /* ====== Hasil ====== */
+    .hasil {
+      margin-top: 25px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 18px;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
     }
 
-    .operator:hover {
-      background: #ffad33;
+    .hasil strong {
+      color: #84fab0;
     }
 
-    .equal {
-      background: #00b894;
-      grid-column: span 2;
+    .error {
+      color: #ff8b8b;
     }
 
-    .equal:hover {
-      background: #00d3aa;
+    /* ====== Animasi ====== */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .clear {
-      background: #d63031;
-    }
-
-    .clear:hover {
-      background: #ff4d4d;
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
 <body>
 
-  <div class="calculator">
-    <div class="display" id="display">0</div>
-    <div class="buttons">
-      <button class="clear" onclick="clearDisplay()">C</button>
-      <button onclick="deleteLast()">⌫</button>
-      <button onclick="append('%')">%</button>
-      <button class="operator" onclick="append('/')">÷</button>
+  <div class="kalkulator">
+    <h2>🧮 Kalkulator Modern</h2>
 
-      <button onclick="append('7')">7</button>
-      <button onclick="append('8')">8</button>
-      <button onclick="append('9')">9</button>
-      <button class="operator" onclick="append('*')">×</button>
-
-      <button onclick="append('4')">4</button>
-      <button onclick="append('5')">5</button>
-      <button onclick="append('6')">6</button>
-      <button class="operator" onclick="append('-')">−</button>
-
-      <button onclick="append('1')">1</button>
-      <button onclick="append('2')">2</button>
-      <button onclick="append('3')">3</button>
-      <button class="operator" onclick="append('+')">+</button>
-
-      <button onclick="append('0')">0</button>
-      <button onclick="append('.')">.</button>
-      <button class="equal" onclick="calculate()">=</button>
+    <!-- Input Angka -->
+    <div class="input-box">
+      <input type="number" id="angka1" placeholder="Masukkan angka pertama">
+      <input type="number" id="angka2" placeholder="Masukkan angka kedua">
     </div>
+
+    <!-- Tombol Operasi -->
+    <div class="tombol">
+      <button onclick="hitung('+')">+</button>
+      <button onclick="hitung('-')">−</button>
+      <button onclick="hitung('*')">×</button>
+      <button onclick="hitung('/')">÷</button>
+    </div>
+
+    <!-- Hasil -->
+    <div id="hasil" class="hasil">Hasil akan muncul di sini</div>
   </div>
 
+
+   <!-- js -->
   <script>
-    const display = document.getElementById("display");
+    function hitung(op) {
+      const angka1 = parseFloat(document.getElementById("angka1").value);
+      const angka2 = parseFloat(document.getElementById("angka2").value);
+      const hasilBox = document.getElementById("hasil");
 
-    function append(value) {
-      if (display.innerText === "0") display.innerText = "";
-      display.innerText += value;
-    }
-
-    function clearDisplay() {
-      display.innerText = "0";
-    }
-
-    function deleteLast() {
-      if (display.innerText.length > 1) {
-        display.innerText = display.innerText.slice(0, -1);
-      } else {
-        display.innerText = "0";
+      // Validasi input
+      if (isNaN(angka1) || isNaN(angka2)) {
+        hasilBox.innerHTML = "<span class='error'>⚠️ Harap isi kedua angka dengan benar!</span>";
+        return;
       }
-    }
 
-    function calculate() {
-      try {
-        let result = eval(display.innerText.replace('÷', '/').replace('×', '*'));
-        display.innerText = result;
-      } catch {
-        display.innerText = "Error";
+      let hasil;
+
+      switch (op) {
+        case '+':
+          hasil = angka1 + angka2;
+          break;
+        case '-':
+          hasil = angka1 - angka2;
+          break;
+        case '*':
+          hasil = angka1 * angka2;
+          break;
+        case '/':
+          if (angka2 === 0) {
+            hasilBox.innerHTML = "<span class='error'>❌ Tidak bisa dibagi dengan nol!</span>";
+            return;
+          }
+          hasil = angka1 / angka2;
+          break;
       }
+
+      hasilBox.innerHTML = \`✅ Hasil: <strong>\${hasil}</strong>\`;
+      hasilBox.style.animation = "pop 0.3s ease";
+      setTimeout(() => hasilBox.style.animation = "", 300);
     }
   </script>
 
 </body>
 </html>
+
 `
   },
   {
@@ -1333,136 +1381,142 @@ const yahsatupiSources: EasterEggSourceFile[] = [
     code: String.raw`<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kalkulator Diskon</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aplikasi Perhitungan Diskon</title>
+<style>
+  /* ===== STYLE UMUM ===== */
+  * { box-sizing: border-box; font-family: "Poppins", sans-serif; }
+  body {
+    background: linear-gradient(135deg, #232526, #414345);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    body {
-      background: linear-gradient(135deg, #1e1f29, #2d2f3a);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
+  /* ===== KOTAK UTAMA ===== */
+  .card {
+    background: #ffffff15;
+    backdrop-filter: blur(8px);
+    width: 330px;
+    border-radius: 16px;
+    padding: 30px 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    color: #fff;
+    text-align: center;
+  }
 
-    .container {
-      text-align: center;
-    }
+  .card h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #ffe98a;
+  }
 
-    .card {
-      background: #2c2f3f;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-      width: 320px;
-      margin: 20px auto;
-    }
+  /* ===== INPUT & TOMBOL ===== */
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    text-align: center;
+    outline: none;
+  }
 
-    h1 {
-      margin-bottom: 10px;
-      font-size: 1.8rem;
-    }
+  input:focus {
+    box-shadow: 0 0 5px #ffe98a;
+  }
 
-    label {
-      display: block;
-      text-align: left;
-      margin-top: 15px;
-      margin-bottom: 5px;
-      font-size: 0.95rem;
-    }
+  button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ffe98a;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+  }
 
-    input {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      outline: none;
-      background: #1c1d26;
-      color: #00ff99;
-    }
+  button:hover {
+    background-color: #fff3b0;
+  }
 
-    button {
-      width: 100%;
-      background: #00b894;
-      border: none;
-      color: white;
-      font-size: 1.1rem;
-      padding: 12px;
-      border-radius: 10px;
-      margin-top: 20px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+  /* ===== HASIL ===== */
+  .hasil {
+    margin-top: 20px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    padding: 12px;
+    min-height: 60px;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
-    button:hover {
-      background: #00d3aa;
-    }
-
-    .hasil {
-      background: #1c1d26;
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 10px;
-      text-align: left;
-    }
-
-    .hasil p {
-      margin: 5px 0;
-      font-size: 1rem;
-    }
-
-    span {
-      color: #00ff99;
-      font-weight: 600;
-    }
-  </style>
+  .error { color: #ff8a8a; }
+  .success { color: #b6f7b0; }
+</style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>💸 Kalkulator Diskon</h1>
-    <div class="card">
-      <label for="harga">Harga Barang (Rp)</label>
-      <input type="number" id="harga">
+  <!-- ===== STRUKTUR HTML ===== -->
+  <div class="card">
+    <h2>💰 Aplikasi Perhitungan Diskon</h2>
 
-      <label for="diskon">Diskon (%)</label>
-      <input type="number" id="diskon">
+    <!-- Input harga barang -->
+    <input type="number" id="harga" placeholder="Masukkan harga barang (Rp)">
 
-      <button onclick="hitungDiskon()">Hitung</button>
+    <!-- Input persen diskon -->
+    <input type="number" id="diskon" placeholder="Masukkan diskon (%)">
 
-      <div class="hasil" id="hasil">
-        <p>Harga Setelah Diskon: <span id="hargaSetelah">Rp 0</span></p>
-      </div>
-    </div>
+    <!-- Tombol hitung -->
+    <button onclick="hitungDiskon()">Hitung</button>
+
+    <!-- Hasil perhitungan -->
+    <div id="hasil" class="hasil">Hasil akan muncul di sini</div>
   </div>
 
+  <!-- ===== LOGIKA JAVASCRIPT ===== -->
   <script>
     function hitungDiskon() {
       const harga = parseFloat(document.getElementById("harga").value);
       const diskon = parseFloat(document.getElementById("diskon").value);
+      const hasil = document.getElementById("hasil");
 
+      // Validasi input
       if (isNaN(harga) || isNaN(diskon)) {
-        alert("Harap isi semua kolom dengan angka yang valid!");
+        hasil.innerHTML = "<span class='error'>⚠️ Isi harga dan diskon dengan benar!</span>";
+        return;
+      }
+      if (harga <= 0) {
+        hasil.innerHTML = "<span class='error'>⚠️ Harga harus lebih dari 0!</span>";
+        return;
+      }
+      if (diskon < 0 || diskon > 100) {
+        hasil.innerHTML = "<span class='error'>⚠️ Diskon harus antara 0 - 100%!</span>";
         return;
       }
 
-      const hargaSetelah = harga - (harga * diskon / 100);
+      // Hitung total harga
+      const potongan = harga * (diskon / 100);
+      const total = harga - potongan;
 
-      document.getElementById("hargaSetelah").textContent =
-        "Rp " + hargaSetelah.toLocaleString("id-ID");
+      // Tampilkan hasil
+      hasil.innerHTML = \`
+        <span class='success'>💸 Diskon: Rp \${potongan.toFixed(2)}</span>
+        <span class='success'>✅ Total Bayar: Rp \${total.toFixed(2)}</span>
+      \`;
     }
   </script>
 
 </body>
 </html>
+
 
 `
   },
@@ -1471,227 +1525,223 @@ const yahsatupiSources: EasterEggSourceFile[] = [
     code: String.raw`<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To-Do List dengan Edit</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
-    body {
-      background: linear-gradient(135deg, #1e1f29, #2d2f3a);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    .todo-container {
-      background: #2c2f3f;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-      width: 380px;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 1.8rem;
-      color: #00ff99;
-    }
-
-    .input-area {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    input {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      outline: none;
-      background: #1c1d26;
-      color: #808080;
-    }
-
-    button {
-      background: #00b894;
-      border: none;
-      color: white;
-      font-size: 1rem;
-      padding: 10px 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    button:hover {
-      background: #00d3aa;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    li {
-      background: #1c1d26;
-      padding: 10px 12px;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: 0.2s;
-    }
-
-    li.done {
-      text-decoration: line-through;
-      color: #777;
-    }
-
-    .task-text {
-      flex: 1;
-      cursor: pointer;
-    }
-
-    .action-buttons {
-      display: flex;
-      gap: 6px;
-    }
-
-    .edit-btn, .delete-btn, .save-btn {
-      border: none;
-      border-radius: 5px;
-      padding: 5px 8px;
-      cursor: pointer;
-      transition: 0.2s;
-      color: white;
-    }
-
-    .edit-btn { background: #ff9500; }
-    .edit-btn:hover { background: #ffad33; }
-
-    .delete-btn { background: #d63031; }
-    .delete-btn:hover { background: #ff4d4d; }
-
-    .save-btn { background: #00b894; }
-    .save-btn:hover { background: #00d3aa; }
-
-    .edit-input {
-      width: 100%;
-      padding: 5px;
-      border: none;
-      border-radius: 5px;
-      background: #2c2f3f;
-      color: #3c3c3c;
-      font-size: 1rem;
-    }
-  </style>
+  <title>Aplikasi To-Do List</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="todo-container">
-    <h1> To Do List</h1>
+  <div class="container">
+    <h1>📝 To-Do List Harian</h1>
 
     <div class="input-area">
-      <input type="text" id="taskInput" placeholder="Tambahkan tugas...">
+      <input type="text" id="taskName" placeholder="Masukkan nama tugas...">
+      <input type="date" id="taskDate">
+      <select id="taskPriority">
+        <option value="belum selesai">belum selesai</option>
+        <option value="Sedang kerja">Sedang kerja</option>
+        <option value="selesai">selesai</option>
+      </select>
       <button onclick="addTask()">Tambah</button>
     </div>
 
     <ul id="taskList"></ul>
   </div>
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #2c5364, #203a43, #0f2027);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
 
-  <script>
-    const taskInput = document.getElementById("taskInput");
-    const taskList = document.getElementById("taskList");
+  .container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    padding: 25px;
+    margin-top: 50px;
+    width: 90%;
+    max-width: 600px;
+    backdrop-filter: blur(10px);
+  }
 
-    function addTask() {
-      const text = taskInput.value.trim();
-      if (text === "") {
-        alert("Masukkan tugas terlebih dahulu!");
-        return;
-      }
+  h1 {
+    text-align: center;
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
+    margin-bottom: 20px;
+  }
 
+  .input-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .input-area input,
+  .input-area select {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+  }
+
+  button {
+    padding: 10px 20px;
+    background: #00bcd4;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background: #0097a7;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .task {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #00ffff33;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.2s;
+  }
+
+  .task:hover {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .task.done {
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+
+  .task-info {
+    flex: 1;
+  }
+
+  .task small {
+    display: block;
+    color: #ccc;
+  }
+
+  .task button {
+    margin-left: 10px;
+    background: #f44336;
+  }
+
+  .task button.edit {
+    background: #ff9800;
+  }
+
+  .task button.done-btn {
+    background: #4caf50;
+  }
+
+  footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    opacity: 0.8;
+  }
+</style>
+ 
+<script>
+  // Data tugas disimpan di array
+  let tasks = [];
+
+  function addTask() {
+    const name = document.getElementById("taskName").value.trim();
+    const date = document.getElementById("taskDate").value;
+    const priority = document.getElementById("taskPriority").value;
+
+    if (name === "") {
+      alert("Nama tugas tidak boleh kosong!");
+      return;
+    }
+
+    const newTask = {
+      name,
+      date,
+      priority,
+      done: false,
+    };
+
+    tasks.push(newTask);
+    document.getElementById("taskName").value = "";
+    renderTasks();
+  }
+
+  function renderTasks() {
+    const list = document.getElementById("taskList");
+    list.innerHTML = "";
+
+    if (tasks.length === 0) {
+      list.innerHTML = "<p style='text-align:center; color:gray;'>Belum ada tugas</p>";
+      return;
+    }
+
+    tasks.forEach((task, index) => {
       const li = document.createElement("li");
+      li.className = "task" + (task.done ? " done" : "");
 
-      const span = document.createElement("span");
-      span.textContent = text;
-      span.classList.add("task-text");
-      span.addEventListener("click", () => {
-        li.classList.toggle("done");
-      });
+      li.innerHTML = \`
+        <div class="task-info">
+          <strong>\${task.name}</strong>
+          <small>Prioritas: \${task.priority} | Tanggal: \${task.date || "-"}</small>
+        </div>
+        <div class="buttons">
+          <button class="done-btn" onclick="toggleDone(\${index})">✔</button>
+          <button class="edit" onclick="editTask(\${index})">✎</button>
+          <button onclick="deleteTask(\${index})">🗑</button>
+        </div>
+      \`;
 
-      const actionDiv = document.createElement("div");
-      actionDiv.classList.add("action-buttons");
-
-      const editBtn = document.createElement("button");
-      editBtn.textContent = "Edit";
-      editBtn.classList.add("edit-btn");
-      editBtn.addEventListener("click", () => editTask(li, span, editBtn));
-
-      const deleteBtn = document.createElement("button");
-      deleteBtn.textContent = "Hapus";
-      deleteBtn.classList.add("delete-btn");
-      deleteBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        li.remove();
-      });
-
-      actionDiv.appendChild(editBtn);
-      actionDiv.appendChild(deleteBtn);
-
-      li.appendChild(span);
-      li.appendChild(actionDiv);
-      taskList.appendChild(li);
-
-      taskInput.value = "";
-    }
-
-    function editTask(li, span, editBtn) {
-      const currentText = span.textContent;
-      const inputEdit = document.createElement("input");
-      inputEdit.value = currentText;
-      inputEdit.classList.add("edit-input");
-
-      li.replaceChild(inputEdit, span);
-      editBtn.textContent = "Simpan";
-      editBtn.classList.remove("edit-btn");
-      editBtn.classList.add("save-btn");
-
-      editBtn.onclick = () => {
-        const newText = inputEdit.value.trim();
-        if (newText === "") {
-          alert("Teks tidak boleh kosong!");
-          return;
-        }
-        span.textContent = newText;
-        li.replaceChild(span, inputEdit);
-        editBtn.textContent = "Edit";
-        editBtn.classList.remove("save-btn");
-        editBtn.classList.add("edit-btn");
-        editBtn.onclick = () => editTask(li, span, editBtn);
-      };
-    }
-
-    taskInput.addEventListener("keypress", function(e) {
-      if (e.key === "Enter") addTask();
+      list.appendChild(li);
     });
-  </script>
+  }
+
+  function toggleDone(index) {
+    tasks[index].done = !tasks[index].done;
+    renderTasks();
+  }
+
+  function deleteTask(index) {
+    if (confirm("Yakin ingin menghapus tugas ini?")) {
+      tasks.splice(index, 1);
+      renderTasks();
+    }
+  }
+
+  function editTask(index) {
+    const newName = prompt("Ubah nama tugas:", tasks[index].name);
+    if (newName && newName.trim() !== "") {
+      tasks[index].name = newName.trim();
+      renderTasks();
+    }
+  }
+</script>
 
 </body>
 </html>
-
-
 `
   },
   
