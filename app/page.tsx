@@ -1180,7 +1180,7 @@ const yahsatupiSources: EasterEggSourceFile[] = [
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kalkulator Modern</title>
   <style>
-    /* ====== Reset dan Dasar ====== */
+
     * {
       box-sizing: border-box;
       font-family: "Poppins", sans-serif;
@@ -1196,7 +1196,7 @@ const yahsatupiSources: EasterEggSourceFile[] = [
       color: #fff;
     }
 
-    /* ====== Container Utama ====== */
+
     .kalkulator {
       width: 340px;
       background: rgba(255, 255, 255, 0.12);
@@ -1216,7 +1216,7 @@ const yahsatupiSources: EasterEggSourceFile[] = [
       text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     }
 
-    /* ====== Input ====== */
+
     .input-box {
       display: flex;
       flex-direction: column;
@@ -1240,7 +1240,7 @@ const yahsatupiSources: EasterEggSourceFile[] = [
       transform: scale(1.03);
     }
 
-    /* ====== Tombol Operasi ====== */
+
     .tombol {
       margin-top: 20px;
       display: grid;
@@ -1266,7 +1266,7 @@ const yahsatupiSources: EasterEggSourceFile[] = [
       box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
     }
 
-    /* ====== Hasil ====== */
+
     .hasil {
       margin-top: 25px;
       background: rgba(0, 0, 0, 0.3);
@@ -1288,7 +1288,7 @@ const yahsatupiSources: EasterEggSourceFile[] = [
       color: #ff8b8b;
     }
 
-    /* ====== Animasi ====== */
+    
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -1312,13 +1312,13 @@ const yahsatupiSources: EasterEggSourceFile[] = [
   <div class="kalkulator">
     <h2>🧮 Kalkulator Modern</h2>
 
-    <!-- Input Angka -->
+    
     <div class="input-box">
       <input type="number" id="angka1" placeholder="Masukkan angka pertama">
       <input type="number" id="angka2" placeholder="Masukkan angka kedua">
     </div>
 
-    <!-- Tombol Operasi -->
+    
     <div class="tombol">
       <button onclick="hitung('+')">+</button>
       <button onclick="hitung('-')">−</button>
@@ -1326,19 +1326,19 @@ const yahsatupiSources: EasterEggSourceFile[] = [
       <button onclick="hitung('/')">÷</button>
     </div>
 
-    <!-- Hasil -->
+    
     <div id="hasil" class="hasil">Hasil akan muncul di sini</div>
   </div>
 
 
-   <!-- js -->
+   
   <script>
     function hitung(op) {
       const angka1 = parseFloat(document.getElementById("angka1").value);
       const angka2 = parseFloat(document.getElementById("angka2").value);
       const hasilBox = document.getElementById("hasil");
 
-      // Validasi input
+      
       if (isNaN(angka1) || isNaN(angka2)) {
         hasilBox.innerHTML = "<span class='error'>⚠️ Harap isi kedua angka dengan benar!</span>";
         return;
@@ -1384,7 +1384,7 @@ const yahsatupiSources: EasterEggSourceFile[] = [
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aplikasi Perhitungan Diskon</title>
 <style>
-  /* ===== STYLE UMUM ===== */
+  
   * { box-sizing: border-box; font-family: "Poppins", sans-serif; }
   body {
     background: linear-gradient(135deg, #232526, #414345);
@@ -1395,7 +1395,7 @@ const yahsatupiSources: EasterEggSourceFile[] = [
     justify-content: center;
   }
 
-  /* ===== KOTAK UTAMA ===== */
+  
   .card {
     background: #ffffff15;
     backdrop-filter: blur(8px);
@@ -1413,7 +1413,7 @@ const yahsatupiSources: EasterEggSourceFile[] = [
     color: #ffe98a;
   }
 
-  /* ===== INPUT & TOMBOL ===== */
+  
   input {
     width: 100%;
     padding: 10px;
@@ -1445,7 +1445,7 @@ const yahsatupiSources: EasterEggSourceFile[] = [
     background-color: #fff3b0;
   }
 
-  /* ===== HASIL ===== */
+  
   .hasil {
     margin-top: 20px;
     background: rgba(0,0,0,0.3);
@@ -1464,31 +1464,31 @@ const yahsatupiSources: EasterEggSourceFile[] = [
 </head>
 <body>
 
-  <!-- ===== STRUKTUR HTML ===== -->
+  
   <div class="card">
     <h2>💰 Aplikasi Perhitungan Diskon</h2>
 
-    <!-- Input harga barang -->
+    
     <input type="number" id="harga" placeholder="Masukkan harga barang (Rp)">
 
-    <!-- Input persen diskon -->
+    
     <input type="number" id="diskon" placeholder="Masukkan diskon (%)">
 
-    <!-- Tombol hitung -->
+    
     <button onclick="hitungDiskon()">Hitung</button>
 
-    <!-- Hasil perhitungan -->
+    
     <div id="hasil" class="hasil">Hasil akan muncul di sini</div>
   </div>
 
-  <!-- ===== LOGIKA JAVASCRIPT ===== -->
+  
   <script>
     function hitungDiskon() {
       const harga = parseFloat(document.getElementById("harga").value);
       const diskon = parseFloat(document.getElementById("diskon").value);
       const hasil = document.getElementById("hasil");
 
-      // Validasi input
+      
       if (isNaN(harga) || isNaN(diskon)) {
         hasil.innerHTML = "<span class='error'>⚠️ Isi harga dan diskon dengan benar!</span>";
         return;
@@ -1502,11 +1502,11 @@ const yahsatupiSources: EasterEggSourceFile[] = [
         return;
       }
 
-      // Hitung total harga
+      /
       const potongan = harga * (diskon / 100);
       const total = harga - potongan;
 
-      // Tampilkan hasil
+      
       hasil.innerHTML = \`
         <span class='success'>💸 Diskon: Rp \${potongan.toFixed(2)}</span>
         <span class='success'>✅ Total Bayar: Rp \${total.toFixed(2)}</span>
