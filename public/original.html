@@ -581,5 +581,72 @@ setInterval(flicker, 100);
     </tr> 
    </tbody> 
   </table> 
- </body>
+</body>
+<!-- Audio: scream-short.mp3 (in /public) -->
+<style>
+  #audio-play-btn{
+    display:none;
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    z-index:9999;
+    background:#e53935;
+    color:white;
+    border:none;
+    padding:10px 14px;
+    border-radius:6px;
+    font-family:Arial, sans-serif;
+    box-shadow:0 4px 14px rgba(0,0,0,0.4);
+    cursor:pointer;
+  }
+  #audio-play-btn:active{transform:translateY(1px)}
+</style>
+
+<audio id="bg-audio" src="/scream-short.mp3" preload="auto"></audio>
+<button id="audio-play-btn" aria-label="Play audio">Play sound</button>
+
+<script>
+  (function(){
+    var audio = document.getElementById('bg-audio');
+    var btn = document.getElementById('audio-play-btn');
+
+    // Prefer not to loop a scream; set loop=false. Adjust volume if needed.
+    audio.loop = false;
+    audio.volume = 1.0;
+
+    // Try autoplay once on load. If blocked, show a play button for user gesture.
+    function tryPlay(){
+      var p = audio.play();
+      if (p !== undefined) {
+        p.then(function(){
+          // autoplay succeeded; hide button if visible
+          btn.style.display = 'none';
+        }).catch(function(err){
+          // autoplay blocked — show the button so the user can start audio
+          btn.style.display = 'block';
+        });
+      }
+    }
+
+    // On some browsers play() may not return a promise; use a short timeout as fallback
+    setTimeout(tryPlay, 200);
+
+    // Wire the button to play when the user clicks/taps
+    btn.addEventListener('click', function(){
+      audio.play().catch(function(){ /* ignore */ });
+      btn.style.display = 'none';
+    }, {once:true});
+
+    // Also try to play on the first user interaction (gesture) as a fallback
+    function onFirstGesture(){
+      try{ audio.play(); }catch(e){}
+      window.removeEventListener('click', onFirstGesture);
+      window.removeEventListener('keydown', onFirstGesture);
+    }
+    window.addEventListener('click', onFirstGesture, {once:true});
+    window.addEventListener('keydown', onFirstGesture, {once:true});
+  })();
+</script>
+
+</html>
 </html>
