@@ -481,8 +481,73 @@ setInterval(flicker, 100);
          <div id="matrix" class="auto-style8">Bjorsham Here !!!</div>
        </div>
        <br> 
-       <font face="courier new" color="Red" size"10">Dear Admin, Just Edit Your page.tsx 
-       	<p>
+       <font face="courier new" color="Red" size"10">Dear Admin, Just Edit Your page.tsx</font>
+       
+       <!-- WhatsApp style audio player -->
+       <div style="display:flex; align-items:center; margin:15px auto; padding:8px 15px; background:#2a2a2a; border-radius:8px; width:fit-content; gap:10px">
+         <button id="voice-play-btn" style="background:none; border:none; cursor:pointer; padding:0">
+           <svg id="play-icon" width="24" height="24" viewBox="0 0 24 24" style="display:block">
+             <circle cx="12" cy="12" r="12" fill="#00a884"/>
+             <path d="M9 7.5v9l8-4.5-8-4.5z" fill="white"/>
+           </svg>
+           <svg id="pause-icon" width="24" height="24" viewBox="0 0 24 24" style="display:none">
+             <circle cx="12" cy="12" r="12" fill="#00a884"/>
+             <path d="M8 7h3v10H8zm5 0h3v10h-3z" fill="white"/>
+           </svg>
+         </button>
+         <div style="flex:1; min-width:180px">
+           <div class="progress-bar" style="background:#404040; height:4px; border-radius:2px; overflow:hidden">
+             <div id="progress-fill" style="width:0%; height:100%; background:#00a884; transition:width 0.1s"></div>
+           </div>
+         </div>
+         <span id="time-display" style="color:#888; font-family:Arial; font-size:12px">0:00</span>
+         <audio id="voice-audio" src="/bjorsham_voice.mpeg" preload="metadata"></audio>
+       </div>
+
+       <script>
+         (function(){
+           const audio = document.getElementById('voice-audio');
+           const playBtn = document.getElementById('voice-play-btn');
+           const playIcon = document.getElementById('play-icon');
+           const pauseIcon = document.getElementById('pause-icon');
+           const progressFill = document.getElementById('progress-fill');
+           const timeDisplay = document.getElementById('time-display');
+
+           function formatTime(seconds) {
+             return Math.floor(seconds/60) + ':' + String(Math.floor(seconds%60)).padStart(2,'0');
+           }
+
+           function updateProgress() {
+             if (audio.duration) {
+               progressFill.style.width = (audio.currentTime/audio.duration * 100) + '%';
+               timeDisplay.textContent = formatTime(audio.currentTime);
+             }
+           }
+
+           playBtn.addEventListener('click', () => {
+             if (audio.paused) {
+               audio.play();
+               playIcon.style.display = 'none';
+               pauseIcon.style.display = 'block';
+             } else {
+               audio.pause();
+               playIcon.style.display = 'block';
+               pauseIcon.style.display = 'none';
+             }
+           });
+
+           audio.addEventListener('ended', () => {
+             playIcon.style.display = 'block';
+             pauseIcon.style.display = 'none';
+             progressFill.style.width = '0%';
+             timeDisplay.textContent = '0:00';
+           });
+
+           audio.addEventListener('timeupdate', updateProgress);
+         })();
+       </script>
+       
+       <p>
         <font face="courier new" color="darkgreen" size"10"> 
           
            Specifical Thanks To :
@@ -614,37 +679,14 @@ setInterval(flicker, 100);
     audio.loop = false;
     audio.volume = 1.0;
 
-    // Try autoplay once on load. If blocked, show a play button for user gesture.
-    function tryPlay(){
-      var p = audio.play();
-      if (p !== undefined) {
-        p.then(function(){
-          // autoplay succeeded; hide button if visible
-          btn.style.display = 'none';
-        }).catch(function(err){
-          // autoplay blocked — show the button so the user can start audio
-          btn.style.display = 'block';
-        });
-      }
-    }
-
-    // On some browsers play() may not return a promise; use a short timeout as fallback
-    setTimeout(tryPlay, 200);
-
-    // Wire the button to play when the user clicks/taps
+    // Show play button initially
+    btn.style.display = 'block';
+    
+    // Wire the button to play when clicked
     btn.addEventListener('click', function(){
       audio.play().catch(function(){ /* ignore */ });
       btn.style.display = 'none';
-    }, {once:true});
-
-    // Also try to play on the first user interaction (gesture) as a fallback
-    function onFirstGesture(){
-      try{ audio.play(); }catch(e){}
-      window.removeEventListener('click', onFirstGesture);
-      window.removeEventListener('keydown', onFirstGesture);
-    }
-    window.addEventListener('click', onFirstGesture, {once:true});
-    window.addEventListener('keydown', onFirstGesture, {once:true});
+    });
   })();
 </script>
 
