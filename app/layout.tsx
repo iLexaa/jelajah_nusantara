@@ -33,22 +33,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* Fixed top-left PDF preview — clickable overlay opens the PDF in a new tab */}
-        <div
-          style={{
-            position: 'fixed',
-            left: 12,
-            top: 12,
-            width: 240,
-            height: 160,
-            zIndex: 9999,
-            borderRadius: 10,
-            overflow: 'hidden',
-            boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
-            background: '#ffffff',
-            border: '1px solid rgba(0,0,0,0.08)',
-          }}
-          aria-hidden={false}
-        >
+        <div className="pdf-preview" aria-hidden={false}>
           <div style={{position: 'relative', width: '100%', height: '100%'}}>
             {/* Simple inline preview using an iframe. pointerEvents:none prevents the iframe
                 from capturing clicks so the overlay link can open the PDF in a new tab. */}
