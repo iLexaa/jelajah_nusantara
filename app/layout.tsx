@@ -94,7 +94,7 @@ to your computer.
 
 IRQL_NOT_LESS_OR_EQUAL
 
-If this is the first time you've seen this Stop error screen,
+If this is the first time you&apos;ve seen this Stop error screen,
 restart your computer. If this screen appears again, follow
 these steps:
 
